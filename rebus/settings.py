@@ -37,6 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'camunda',
+    'process_management',
+    'processes',
+    'tasks',
 ]
 
 MIDDLEWARE = [
@@ -124,4 +128,4 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-CAMUNDA_URL = 'http://camunda'
+CAMUNDA_URL = 'http://camunda:8080/engine-rest'
