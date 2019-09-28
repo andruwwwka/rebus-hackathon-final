@@ -29,7 +29,3 @@ class TaskCompleteResource(APIView):
     def post(self, request, id, serializer):
         comunda_task.complete(id, serializer.validated_data)
         return Response('Ok')
-
-# список
-# пофильтровать по асигнеру
-# завершить
