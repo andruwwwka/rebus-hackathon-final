@@ -25,7 +25,7 @@ class ComundaTask(CamundaWrapper):
 
     def complete(self, id, body):
         # POST /task/{id}/complete
-        response = requests.post(f'{self.server}/{id}/complete', body=body)
+        response = requests.post(f'{self.server}/{id}/complete', data=body, headers=self.header)
         if response.status_code != 204:
             raise CamundaBadRequest()
         return True

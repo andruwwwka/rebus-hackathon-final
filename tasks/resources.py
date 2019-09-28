@@ -25,7 +25,7 @@ class TaskFormResource(APIView):
 
 class TaskCompleteResource(APIView):
 
-    @with_serializer(TaskCompleteRequestSerializer, success_code=status.HTTP_204_NO_CONTENT)
-    def post(self, request, id, serializer):
-        comunda_task.complete(id, serializer.validated_data)
+    # @with_serializer(TaskCompleteRequestSerializer, success_code=status.HTTP_204_NO_CONTENT)
+    def post(self, request, id):
+        comunda_task.complete(id, request.data)
         return Response('Ok')

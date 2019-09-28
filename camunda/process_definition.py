@@ -8,10 +8,7 @@ class ComundaProcessDefinition(CamundaWrapper):
     def __init__(self):
         super(ComundaProcessDefinition, self).__init__()
         self.server += '/process-definition'
-        self.header ={
-            'Content-type':'application/json',
-            'Accept':'application/json'
-        }
+
     def start_by_id(self, id, body):
         # POST /process-definition/{id}/start
 
