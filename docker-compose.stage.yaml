@@ -28,7 +28,7 @@ services:
 
   api:
     image: andruwwwka/rebus:latest
-    command: ["gunicorn --bind 0.0.0.0:80 rebus_hackaton.wsgi:application"]
+    command: ["gunicorn", "--bind", "0.0.0.0:80", "rebus.wsgi:application"]
     depends_on:
       - db
       - camunda
