@@ -35,12 +35,19 @@ class ComundaDeployment(CamundaWrapper):
             raise CamundaBadRequest()
         return response.json()
 
+    def resources_list(self, id):
+        # GET /deployment/{id}/resources
+        response = requests.get(f'{self.server}/{id}/resources')
+        if response.status_code != 200:
+            raise CamundaNotFound()
+        return response.json()
+
     def resources_data(self, id, resource_id):
         # GET /deployment/{id}/resources/{resourceId}/data
         response = requests.get(f'{self.server}/{id}/resources/{resource_id}/data')
         if response.status_code != 200:
             raise CamundaNotFound()
-        return response.json()
+        return response.content
 
     def delete(self, id):
         # DELETE /deployment/{id}

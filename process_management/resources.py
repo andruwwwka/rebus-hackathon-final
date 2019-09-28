@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -20,7 +21,9 @@ class ProcessManagementSchemaDataResource(APIView):
 
     def get(self, request, id, resource_id):
         schema = camunda_deployment.resources_data(id, resource_id)
-        return Response(schema)
+        response = HttpResponse(schema, content_type='text/xml')
+        response['Content-Disposition'] = f'attachment; filename="{resource_id}.bpmn"'
+        return response
 
 
 class ProcessManagementDeleteResource(APIView):
@@ -35,3 +38,10 @@ class ProcessManagementListResource(APIView):
     def get(self, request):
         processes = camunda_deployment.list()
         return Response(processes)
+
+
+class ProcessManagementSchemaListResource(APIView):
+
+    def get(self, request, id):
+        schema = camunda_deployment.resources_list(id)
+        return Response(schema)
