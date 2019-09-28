@@ -9,14 +9,14 @@ class ComundaTask(CamundaWrapper):
         super(ComundaTask, self).__init__()
         self.server += '/task'
 
-    def list(self):
+    def list(self, query):
         # GET /task
-        response = requests.get(self.server)
+        response = requests.get(self.server, params=query)
         if response.status_code != 200:
             raise CamundaBadRequest()
         return response.json()
 
-    def form_key(self):
+    def form_key(self, id):
         # GET /task/{id}/form
         response = requests.get(f'{self.server}/{id}/form')
         if response.status_code != 200:

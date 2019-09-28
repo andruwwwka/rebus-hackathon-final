@@ -1,9 +1,10 @@
 from django.urls import path
 
-from tasks.resources import TaskResources
+from tasks.resources import TaskResource, TaskFormResource
 
 app_name = "tasks"
 
 urlpatterns = [
-    path('', TaskResources.as_view()),
+    path('', TaskResource.as_view()),
+    path(r'form/<slug:id>', TaskFormResource.as_view()),
 ]

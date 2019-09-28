@@ -1,16 +1,26 @@
+from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework.viewsets import GenericViewSet
 
 from camunda.task import comunda_task
-from tasks.serializers import TaskResponseSerializer
+from core.decorators import with_serializer
+from tasks.serializers import TaskListGetParametersSerializer
 
 
-class TaskResources(APIView):
+class TaskResource(APIView):
 
-    def get(self, request):
-        tasks = comunda_task.list()
+    @with_serializer(TaskListGetParametersSerializer, success_code=status.HTTP_200_OK,
+                     dataGetter=lambda request: request.GET)
+    def get(self, request, serializer):
+        tasks = comunda_task.list(serializer.validated_data)
         return Response(tasks)
+
+
+class TaskFormResource(APIView):
+
+    def get(self, request, id):
+        form = comunda_task.form_key(id)
+        return Response(form)
 
 # список
 # пофильтровать по асигнеру
