@@ -18,7 +18,7 @@ class ComundaDeployment(CamundaWrapper):
 
     def create(self, data):
         # POST /deployment/create
-        response = requests.post(f'{self.server}/create', data={'deployment-name': 'test'}, files={'xml': ('"xml"', data)}, verify=False)
+        response = requests.post(f'{self.server}/create', data={'deployment-name': 'test'}, files={'xml': ('xml', data)}, verify=False)
         if response.status_code != 200:
             raise CamundaBadRequest()
         return response.json()
