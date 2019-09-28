@@ -9,15 +9,17 @@ from processes.serializers import ProcessStartRequestSerializer
 
 class ProcessStartByKeyResource(APIView):
 
-    @with_serializer(ProcessStartRequestSerializer, success_code=status.HTTP_200_OK)
-    def post(self, request, id, serializer):
-        task_result = comunda_process_definition.complete(id, serializer.validated_data)
+    # @with_serializer(ProcessStartRequestSerializer, success_code=status.HTTP_200_OK)
+    def post(self, request, key):
+        task_result = comunda_process_definition.start_by_key(key, request.data)
         return Response(task_result)
 
 
 class ProcessStartByIdResource(APIView):
 
-    @with_serializer(ProcessStartRequestSerializer, success_code=status.HTTP_200_OK)
-    def post(self, request, id, serializer):
-        task_result = comunda_process_definition.complete(id, serializer.validated_data)
+    # @with_serializer(ProcessStartRequestSerializer, success_code=status.HTTP_200_OK)
+    # def post(self, request, id, serializer):
+    def post(self, request, id):
+
+        task_result = comunda_process_definition.start_by_id(id, request.data)
         return Response(task_result)
