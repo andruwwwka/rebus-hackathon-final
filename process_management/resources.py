@@ -9,11 +9,10 @@ from process_management.serializers import ProcessManagementCreateRequestSeriali
 
 class ProcessManagementCreateResource(APIView):
 
-    # @with_serializer(ProcessManagementCreateRequestSerializer, success_code=status.HTTP_200_OK,
-    #                  dataGetter=lambda request: request.body)
-    # def post(self, request, serializer):
     def post(self, request):
-        process = camunda_deployment.create(request.body)
+        data = request.data.copy()
+        files = data.pop('files')
+        process = camunda_deployment.create(data, files)
         return Response(process)
 
 
@@ -21,7 +20,7 @@ class ProcessManagementSchemaDataResource(APIView):
 
     def get(self, request, id, resource_id):
         schema = camunda_deployment.resources_data(id, resource_id)
-        return (schema)
+        return Response(schema)
 
 
 class ProcessManagementDeleteResource(APIView):

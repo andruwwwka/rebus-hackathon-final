@@ -1,4 +1,5 @@
 import requests
+import uuid
 
 from camunda.base import CamundaWrapper, CamundaBadRequest, CamundaNotFound
 
@@ -16,9 +17,20 @@ class ComundaDeployment(CamundaWrapper):
             raise CamundaBadRequest()
         return response.json()
 
-    def create(self, data):
+    def create(self, data, files):
         # POST /deployment/create
-        response = requests.post(f'{self.server}/create', data={'deployment-name': 'test'}, files={'xml': ('xml', data)}, verify=False)
+        data_obj = {
+            'deployment-name': data['deployment_name'],
+            'enable-duplicate-filtering': True,
+            'deployment-source': 'rebus api',
+            'deploy-changed-only': True
+        }
+        post_files = {}
+        for ind, file_info in enumerate(files):
+            post_files.update({
+                f'data_{ind}': (getattr(file_info, 'name', '{}.bpmn'.format(str(uuid.uuid4()))), file_info.file.getvalue())
+            })
+        response = requests.post(f'{self.server}/create', data=data_obj, files=post_files)
         if response.status_code != 200:
             raise CamundaBadRequest()
         return response.json()
