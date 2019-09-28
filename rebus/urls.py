@@ -22,4 +22,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('tasks/', include('tasks.urls'), name='tasks'),
     path('processes/', include('processes.urls'), name='processes'),
+    path('process_management/', include('process_management.urls'), name='process_management'),
 ]

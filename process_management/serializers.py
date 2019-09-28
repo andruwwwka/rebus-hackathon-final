@@ -9,6 +9,10 @@ class DeploymentListResponseSerializer(serializers.Serializer):
     deploymentTime = serializers.DateField()
 
 
+class ProcessManagementCreateRequestSerializer(serializers.Serializer):
+    pass
+
+
 class DeploymentCreateResponseSerializer(serializers.Serializer):
     id = serializers.CharField()
     links = serializers.ListField(child=serializers.DictField())
