@@ -9,9 +9,11 @@ from process_management.serializers import ProcessManagementCreateRequestSeriali
 
 class ProcessManagementCreateResource(APIView):
 
-    @with_serializer(ProcessManagementCreateRequestSerializer, success_code=status.HTTP_200_OK)
-    def post(self, request, serializer):
-        process = camunda_deployment.create(serializer.validated_data)
+    # @with_serializer(ProcessManagementCreateRequestSerializer, success_code=status.HTTP_200_OK,
+    #                  dataGetter=lambda request: request.body)
+    # def post(self, request, serializer):
+    def post(self, request):
+        process = camunda_deployment.create(request.body)
         return Response(process)
 
 

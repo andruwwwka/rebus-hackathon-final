@@ -10,7 +10,8 @@ class DeploymentListResponseSerializer(serializers.Serializer):
 
 
 class ProcessManagementCreateRequestSerializer(serializers.Serializer):
-    pass
+    deployment_name = serializers.CharField(required=True)
+    deployment_source = serializers.CharField(required=True)
 
 
 class DeploymentCreateResponseSerializer(serializers.Serializer):
