@@ -4,7 +4,7 @@ from rest_framework.views import APIView
 
 from camunda.task import comunda_task
 from core.decorators import with_serializer
-from tasks.serializers import TaskListGetParametersSerializer
+from tasks.serializers import TaskListGetParametersSerializer, TaskCompleteRequestSerializer
 
 
 class TaskResource(APIView):
@@ -21,6 +21,14 @@ class TaskFormResource(APIView):
     def get(self, request, id):
         form = comunda_task.form_key(id)
         return Response(form)
+
+
+class TaskCompleteResource(APIView):
+
+    @with_serializer(TaskCompleteRequestSerializer, success_code=status.HTTP_204_NO_CONTENT)
+    def post(self, request, id, serializer):
+        comunda_task.complete(id, serializer.validated_data)
+        return Response('Ok')
 
 # список
 # пофильтровать по асигнеру

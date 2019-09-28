@@ -5,6 +5,10 @@ class TaskListGetParametersSerializer(serializers.Serializer):
     assignee = serializers.CharField(required=True)
 
 
+class TaskCompleteRequestSerializer(serializers.Serializer):
+    pass
+
+
 class TaskResponseSerializer(serializers.Serializer):
     id = serializers.CharField()
     name = serializers.CharField()
