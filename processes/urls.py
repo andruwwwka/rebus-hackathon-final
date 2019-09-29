@@ -4,6 +4,6 @@ from processes.resources import ProcessStartByKeyResource, ProcessStartByIdResou
 
 
 urlpatterns = [
-    path(r'key/<slug:key>/start', ProcessStartByKeyResource.as_view()),
-    path(r'id/<slug:id>/start', ProcessStartByIdResource.as_view()),
+    path(r'key/<slug:key>/start/', ProcessStartByKeyResource.as_view()),
+    path(r'id/<slug:id>/start/', ProcessStartByIdResource.as_view()),
 ]
