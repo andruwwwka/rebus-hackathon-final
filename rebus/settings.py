@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'camunda',
     'process_management',
     'processes',
+    'registry',
     'tasks',
 ]
 

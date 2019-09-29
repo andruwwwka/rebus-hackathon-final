@@ -1,11 +1,8 @@
 from django.http import HttpResponse
-from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from camunda.deployment import camunda_deployment
-from core.decorators import with_serializer
-from process_management.serializers import ProcessManagementCreateRequestSerializer
 
 
 class ProcessManagementCreateResource(APIView):
