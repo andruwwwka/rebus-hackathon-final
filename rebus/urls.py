@@ -24,4 +24,5 @@ urlpatterns = [
     path('processes/', include('processes.urls'), name='processes'),
     path('process_management/', include('process_management.urls'), name='process_management'),
     path('registry/', include('registry.urls'), name='registry'),
+    path('documents/', include('documents.urls'), name='documents'),
 ]

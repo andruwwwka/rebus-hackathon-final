@@ -135,3 +135,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 CAMUNDA_URL = 'http://camunda:8080/engine-rest'
+
+ODT_TEMPLATES_PATH = os.path.join(BASE_DIR, 'documents', 'odt_templates')
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
